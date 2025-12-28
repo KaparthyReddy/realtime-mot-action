@@ -217,11 +217,11 @@ python -m tests.test_data
 
 | Metric | Value |
 |--------|-------|
-| Best Epoch | 4 |
-| Best Val Loss | 6.50 |
-| Final Train Loss | 5.52 |
-| Loss Improvement | 4.87 |
-| Action Accuracy | ~10% (random baseline) |
+| Best Epoch | 3 |
+| Best Val Loss | 8.93 |
+| Final Train Loss | 8.85 |
+| Loss Improvement | 1.62 |
+| Action Accuracy | ~15-25% (Dummy variability) |
 
 ### Expected Performance on Real Datasets
 
@@ -322,11 +322,9 @@ Edit `config/default_config.yaml` or create a new config file in `config/experim
 
 ### Common Issues
 
-**Negative losses:**
-- Detection loss can be negative due to GIoU loss formulation
-- This is normal and expected behavior
-- Total loss should still decrease over time
-
+**Loss Monitoring:**
+- Detection loss is strictly positive (stabilized via clamped GIoU and uncertainty weighting).
+- Initial Detection Loss typically starts around 7.0 - 10.0 on dummy data and should decrease steadily.
 **Out of memory:**
 - Reduce batch size (`--batch-size 2`)
 - Use lite model (`--model lite`)
